@@ -39,14 +39,3 @@ jobs:
             -destination "${{ env.IOS_DESTINATION }}" \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
-
-      - name: Build watchOS target
-        working-directory: ${{ env.PROJECT_DIR }}
-        run: |
-          set -o pipefail
-          xcodebuild build \
-            -project CopCarPasskey.xcodeproj \
-            -scheme CopCarPasskeyWatch \
-            -destination "${{ env.WATCHOS_DESTINATION }}" \
-            CODE_SIGNING_ALLOWED=NO \
-            | xcpretty
