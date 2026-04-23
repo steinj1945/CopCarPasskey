@@ -13,6 +13,8 @@ targets:
   CopCarPasskey:
     type: application
     platform: iOS
+    info:
+      path: CopCarPasskey/Info.plist
     sources:
       - CopCarPasskey
       - CopCarPasskeyShared

@@ -28,6 +28,8 @@
         </dict>
     </array>
 
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleName</key>
     <string>CopCar Passkey</string>
     <key>CFBundleShortVersionString</key>
