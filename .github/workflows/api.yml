@@ -1,0 +1,112 @@
+name: Web API
+
+on:
+  push:
+    branches: [main]
+    paths: ["web/api/**", ".github/workflows/api.yml"]
+  pull_request:
+    branches: [main]
+    paths: ["web/api/**", ".github/workflows/api.yml"]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/onan-passkey-api
+
+jobs:
+  build:
+    name: Build & publish
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/api
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # Uncomment once a test project exists:
+      # - name: Test
+      #   run: dotnet test --no-build --configuration Release --verbosity normal
+
+      - name: Publish
+        run: dotnet publish --no-build --configuration Release --output publish/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-publish
+          path: web/api/publish/
+          retention-days: 7
+
+  docker:
+    name: Docker build & push
+    runs-on: ubuntu-latest
+    needs: build
+    # Only push an image on pushes to main, not on PRs
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix=sha-
+            type=raw,value=latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: web/api
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  # ── Optional deployment steps ─────────────────────────────────────
+  # Uncomment the block that matches your hosting target.
+
+  # Azure App Service:
+  # deploy-azure:
+  #   needs: docker
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - uses: azure/webapps-deploy@v3
+  #       with:
+  #         app-name: <your-app-service-name>
+  #         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+  #         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+  # Fly.io:
+  # deploy-fly:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: superfly/flyctl-actions/setup-flyctl@master
+  #     - run: flyctl deploy --remote-only
+  #       env:
+  #         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

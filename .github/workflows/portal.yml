@@ -1,0 +1,105 @@
+name: Web Portal
+
+on:
+  push:
+    branches: [main]
+    paths: ["web/portal/**", ".github/workflows/portal.yml"]
+  pull_request:
+    branches: [main]
+    paths: ["web/portal/**", ".github/workflows/portal.yml"]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/portal
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          # Switch to 'npm ci' once package-lock.json is committed
+          # cache: "npm"
+          # cache-dependency-path: web/portal/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Type-check
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
+        env:
+          # Point the portal at the API — override in repo secrets for each env
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || '/api' }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: portal-dist
+          path: web/portal/dist/
+          retention-days: 7
+
+  # ── Optional deployment steps ─────────────────────────────────────
+
+  # GitHub Pages (free, good for a private admin panel behind auth):
+  # deploy-pages:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   permissions:
+  #     pages: write
+  #     id-token: write
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deploy.outputs.page_url }}
+  #   steps:
+  #     - uses: actions/download-artifact@v4
+  #       with:
+  #         name: portal-dist
+  #         path: dist/
+  #     - uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: dist/
+  #     - id: deploy
+  #       uses: actions/deploy-pages@v4
+
+  # Cloudflare Pages:
+  # deploy-cloudflare:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - uses: actions/download-artifact@v4
+  #       with:
+  #         name: portal-dist
+  #         path: dist/
+  #     - uses: cloudflare/pages-action@v1
+  #       with:
+  #         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  #         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  #         projectName: onan-passkey-portal
+  #         directory: dist/
+
+  # Netlify:
+  # deploy-netlify:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - uses: actions/download-artifact@v4
+  #       with:
+  #         name: portal-dist
+  #         path: dist/
+  #     - uses: nwtgck/actions-netlify@v3
+  #       with:
+  #         publish-dir: dist/
+  #         production-deploy: true
+  #       env:
+  #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
