@@ -6,8 +6,8 @@ name: CopCarPasskey
 options:
   bundleIdPrefix: net.dtgllc.CopCar
   deploymentTarget:
-    iOS: "17.0"
-    watchOS: "10.0"
+    iOS: "26.0"
+    watchOS: "26.0"
 
 targets:
   CopCarPasskey:

@@ -58,9 +58,11 @@ extension WatchSyncManager: WCSessionDelegate {
         }
     }
 
-    // iOS only — required stubs
+    // iOS only — watchOS 26 SDK marks these unavailable on watchOS
+    #if !os(watchOS)
     nonisolated func sessionDidBecomeInactive(_ session: WCSession) {}
     nonisolated func sessionDidDeactivate(_ session: WCSession) {
         WCSession.default.activate()
     }
+    #endif
 }
