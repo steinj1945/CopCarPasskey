@@ -19,7 +19,9 @@ struct ContentView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gear")
+                            .font(.system(size: 20, weight: .semibold))
                             .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 1)
                     }
                 }
             }
