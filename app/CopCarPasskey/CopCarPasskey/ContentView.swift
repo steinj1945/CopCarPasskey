@@ -10,11 +10,16 @@ struct ContentView: View {
                 background
                 content
             }
-            .navigationTitle("CopCar Passkey")
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("CopCar Passkey")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gear")
+                            .foregroundStyle(.white)
                     }
                 }
             }
@@ -24,12 +29,16 @@ struct ContentView: View {
     // Drop your stock photo into Assets.xcassets as "AppBackground" to replace the dark placeholder
     private var background: some View {
         ZStack {
-            Color(white: 0.08)  // placeholder until photo is added
             Image("AppBackground")
                 .resizable()
                 .scaledToFill()
+            Color.black.opacity(0.40)
+            LinearGradient(
+                colors: [.clear, .black.opacity(0.3)],
+                startPoint: .center,
+                endPoint: .bottom
+            )
         }
-        .overlay(.ultraThinMaterial)
         .ignoresSafeArea()
     }
 
@@ -48,23 +57,25 @@ struct ContentView: View {
             VStack(spacing: 6) {
                 Text(peripheral.isAdvertising ? "Broadcasting" : "Inactive")
                     .font(.title2.bold())
+                    .foregroundStyle(.white)
                 if enrollment.isEnrolled {
                     Text(enrollment.enrolledLabel)
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.white.opacity(0.75))
                 }
                 Text(peripheral.lastEvent)
                     .font(.caption)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(.white.opacity(0.55))
             }
 
             if !enrollment.isEnrolled {
                 VStack(spacing: 8) {
                     Text("No key enrolled")
                         .font(.headline)
+                        .foregroundStyle(.white)
                     Text("Scan the QR code from the admin portal to enroll your device.")
                         .font(.callout)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(.white.opacity(0.75))
                         .multilineTextAlignment(.center)
                 }
                 .padding(.horizontal, 32)

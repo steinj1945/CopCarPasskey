@@ -11,6 +11,7 @@
 		1360A2D08783792A9D84D9CA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF2BE661EFA55C6A52F3C9 /* SettingsView.swift */; };
 		33584822A9E88E87D022C54D /* SecretStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B33A7251F181F5C46552B /* SecretStore.swift */; };
 		38CDD4AFE7A582152087AD93 /* CopCarPasskeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E0425F5BFC54AB37D7B80A /* CopCarPasskeyApp.swift */; };
+		5796019D2F9B90B3001108DF /* Assets 2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5796019B2F9B0428001108DF /* Assets 2.xcassets */; };
 		772E6D552B395E2F4EA80264 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A298979DC746A1EDF15D1D /* ContentView.swift */; };
 		7BFB8C94F598A0140FF6CBE7 /* EnrollmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED719BB7ACBEA636B1AEED /* EnrollmentManager.swift */; };
 		8A666C858598E1BE5540F04B /* HMACAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040C521D5B09690F70C3FE8C /* HMACAuth.swift */; };
@@ -84,6 +85,7 @@
 			buildConfigurationList = EB272093D9E6C2F7CB4BC942 /* Build configuration list for PBXNativeTarget "CopCarPasskey" */;
 			buildPhases = (
 				E9050A049D24F78E1258D593 /* Sources */,
+				5796019C2F9B90A5001108DF /* Resources */,
 			);
 			buildRules = (
 			);
@@ -123,6 +125,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5796019C2F9B90A5001108DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5796019D2F9B90B3001108DF /* Assets 2.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E9050A049D24F78E1258D593 /* Sources */ = {
