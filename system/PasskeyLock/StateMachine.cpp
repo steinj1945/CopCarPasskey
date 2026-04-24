@@ -2,6 +2,7 @@
 #include "BluetoothManager.h"
 #include "RelayController.h"
 #include "CryptoAuth.h"
+#include "SessionCrypto.h"
 #include "Config.h"
 #include <Arduino.h>
 #include <esp_sleep.h>
@@ -82,9 +83,13 @@ void sm_update() {
         digitalWrite(PIN_STATUS_LED, (millis() / 100) % 2);
         if (timed_out(CONNECT_TIMEOUT_MS))  { enter(State::SCANNING); break; }
         if (!bt_connected())                { break; }
-        // Connection and characteristic discovery are done — send challenge
+        // Connection and characteristic discovery are done — send encrypted challenge
         random_nonce(s_nonce, sizeof(s_nonce));
-        bt_send_challenge(s_nonce, sizeof(s_nonce));
+        {
+            uint8_t enc_challenge[SESSION_PACKET_LEN];
+            if (!session_encrypt(s_nonce, enc_challenge)) { enter(State::SLEEP); break; }
+            bt_send_challenge(enc_challenge, SESSION_PACKET_LEN);
+        }
         enter(State::AUTHENTICATING);
         break;
 
@@ -92,8 +97,10 @@ void sm_update() {
         if (timed_out(AUTH_TIMEOUT_MS)) { enter(State::SLEEP); break; }
         if (!bt_response_ready())       { break; }
         {
+            uint8_t enc_response[SESSION_PACKET_LEN];
             uint8_t response[32];
-            bt_read_response(response, sizeof(response));
+            bt_read_response(enc_response, sizeof(enc_response));
+            if (!session_decrypt(enc_response, response)) { enter(State::SLEEP); break; }
             if (hmac_verify(s_nonce, sizeof(s_nonce),
                             response, sizeof(response),
                             HMAC_KEY, HMAC_KEY_LEN)) {

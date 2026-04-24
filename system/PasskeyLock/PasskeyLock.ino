@@ -1,5 +1,6 @@
 #include <Preferences.h>
 #include "Config.h"
+#include "SessionCrypto.h"
 #include "StateMachine.h"
 
 uint8_t g_hmac_key[HMAC_KEY_LEN];
@@ -15,6 +16,10 @@ void setup() {
 
     if (len != HMAC_KEY_LEN) {
         Serial.println("ERROR: No key in NVS. Flash Provisioning.ino first.");
+    }
+
+    if (!session_init()) {
+        Serial.println("ERROR: Session key init failed. Check SessionKeys.h.");
     }
 
     sm_init();

@@ -83,7 +83,7 @@ extension PasskeyPeripheral: CBPeripheralManagerDelegate {
         for request in requests {
             guard request.characteristic.uuid == BLEConstants.challengeUUID,
                   let nonce = request.value,
-                  nonce.count == 32 else { continue }
+                  nonce.count == 60 else { continue }
 
             Task { @MainActor in handleChallenge(nonce, peripheral: p) }
         }
@@ -95,13 +95,18 @@ extension PasskeyPeripheral: CBPeripheralManagerDelegate {
     }
 
     @MainActor
-    private func handleChallenge(_ nonce: Data, peripheral: CBPeripheralManager) {
+    private func handleChallenge(_ encPacket: Data, peripheral: CBPeripheralManager) {
         guard let secret = SecretStore.load() else {
             lastEvent = "No key enrolled"
             return
         }
-        let mac = HMACAuth.response(for: nonce, secret: secret)
-        peripheral.updateValue(mac, for: responseChar, onSubscribedCentrals: nil)
+        guard let plainNonce = try? SessionCrypto.decrypt(encPacket) else {
+            lastEvent = "Decryption failed"
+            return
+        }
+        let mac = HMACAuth.response(for: plainNonce, secret: secret)
+        guard let encResponse = try? SessionCrypto.encrypt(mac) else { return }
+        peripheral.updateValue(encResponse, for: responseChar, onSubscribedCentrals: nil)
         lastEvent = "Challenge answered – \(Date().formatted(date: .omitted, time: .shortened))"
     }
 

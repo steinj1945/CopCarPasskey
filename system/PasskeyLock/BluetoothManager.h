@@ -18,13 +18,13 @@ void bt_connect();
 bool bt_connected();
 void bt_disconnect();
 
-// Write the 32-byte nonce to the CHALLENGE characteristic.
+// Write the 60-byte encrypted nonce packet to the CHALLENGE characteristic.
 void bt_send_challenge(const uint8_t *nonce, uint8_t len);
 
 // Returns true when the peripheral has notified the RESPONSE characteristic.
 bool bt_response_ready();
 
-// Copy the 32-byte HMAC response into buf.
+// Copy the 60-byte encrypted HMAC response packet into buf.
 void bt_read_response(uint8_t *buf, uint8_t len);
 
 // Write a 1-byte status value to the STATUS characteristic.

@@ -17,7 +17,7 @@ static BLEClient*             s_client        = nullptr;
 static BLERemoteCharacteristic* s_challengeChar = nullptr;
 static BLERemoteCharacteristic* s_responseChar  = nullptr;
 static BLERemoteCharacteristic* s_statusChar    = nullptr;
-static uint8_t                s_response_buf[32];
+static uint8_t                s_response_buf[SESSION_PACKET_LEN];
 
 // ── Callbacks ─────────────────────────────────────────────────────
 
@@ -42,8 +42,8 @@ class ClientCallback : public BLEClientCallbacks {
 
 static void onResponseNotify(BLERemoteCharacteristic*, uint8_t* data,
                              size_t len, bool /*isNotify*/) {
-    if (len == 32) {
-        memcpy(s_response_buf, data, 32);
+    if (len == SESSION_PACKET_LEN) {
+        memcpy(s_response_buf, data, SESSION_PACKET_LEN);
         s_response_ready = true;
     }
 }
@@ -136,7 +136,7 @@ bool bt_response_ready() {
 }
 
 void bt_read_response(uint8_t* buf, uint8_t len) {
-    uint8_t copy = (len < 32) ? len : 32;
+    uint8_t copy = (len < SESSION_PACKET_LEN) ? len : SESSION_PACKET_LEN;
     memcpy(buf, s_response_buf, copy);
     s_response_ready = false;
 }

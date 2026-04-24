@@ -30,6 +30,11 @@
 #define NVS_NAMESPACE   "passkey"
 #define NVS_KEY_SECRET  "secret"
 
+// ── BLE session encryption packet size ───────────────────────────
+// CHALLENGE and RESPONSE characteristics carry encrypted payloads:
+//   12 bytes IV + 32 bytes ciphertext + 16 bytes GCM tag = 60 bytes
+#define SESSION_PACKET_LEN  60
+
 // g_hmac_key populated in setup(). Declared extern; defined in PasskeyLock.ino.
 extern uint8_t g_hmac_key[HMAC_KEY_LEN];
 #define HMAC_KEY g_hmac_key
