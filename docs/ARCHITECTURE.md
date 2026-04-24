@@ -1,4 +1,4 @@
-# Onan Passkey — System Architecture
+# CopCarPasskey — System Architecture
 
 ## Overview
 
@@ -39,7 +39,7 @@ background mode, keeping service UUIDs in the advertisement even when the app is
 ### Service Layout
 
 ```
-Service UUID: A1B2C3D4-E5F6-7890-ABCD-EF1234567890  (Onan Passkey Service)
+Service UUID: A1B2C3D4-E5F6-7890-ABCD-EF1234567890  (CopCarPasskey Service)
   ├── CHALLENGE  (notify)   — Arduino writes a 32-byte random nonce
   ├── RESPONSE   (write)    — iOS/Watch writes HMAC-SHA256(nonce, secret)
   └── STATUS     (notify)   — Arduino broadcasts relay state (0x00/0x01)
@@ -97,11 +97,11 @@ For "NFC-style" Watch tap, tighten to -50 dBm (≈ 30cm). Configurable in `Confi
 ## Folder Structure
 
 ```
-iOS-Onan-Modbus/
-├── app/OnanPasskey/
-│   ├── OnanPasskey/          iOS target (SwiftUI, CoreBluetooth)
-│   ├── OnanPasskeyWatch/     watchOS target (SwiftUI, CoreBluetooth)
-│   └── OnanPasskeyShared/    Shared models, HMAC, constants
+CopCarPasskey/
+├── app/CopCarPasskey/
+│   ├── CopCarPasskey/          iOS target (SwiftUI, CoreBluetooth)
+│   ├── CopCarPasskeyWatch/     watchOS target (SwiftUI, CoreBluetooth)
+│   └── CopCarPasskeyShared/    Shared models, HMAC, constants
 ├── system/PasskeyLock/       Arduino firmware
 ├── web/
 │   ├── api/                  ASP.NET Core 8 Web API
