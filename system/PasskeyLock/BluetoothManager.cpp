@@ -51,7 +51,7 @@ static void onResponseNotify(BLERemoteCharacteristic*, uint8_t* data,
 // ── Public API ────────────────────────────────────────────────────
 
 void bt_init() {
-    BLEDevice::init("OnanLock");
+    BLEDevice::init("CopCarLock");
 
     s_scan = BLEDevice::getScan();
     s_scan->setAdvertisedDeviceCallbacks(new ScanCallback());

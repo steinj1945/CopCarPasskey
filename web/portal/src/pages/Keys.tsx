@@ -61,9 +61,9 @@ export default function Keys() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl shadow-xl p-8 max-w-sm w-full space-y-4 text-center">
             <h2 className="text-lg font-bold">Scan to enroll: {newKey.label}</h2>
-            <p className="text-sm text-gray-500">This QR code is shown once. Scan with the Onan Passkey iOS app.</p>
+            <p className="text-sm text-gray-500">This QR code is shown once. Scan with the CopCar Passkey iOS app.</p>
             <div className="flex justify-center">
-              <QRCodeSVG value={`onanpasskey://enroll?secret=${newKey.secret}&label=${encodeURIComponent(newKey.label)}`} size={220} />
+              <QRCodeSVG value={`CopCarpasskey://enroll?secret=${newKey.secret}&label=${encodeURIComponent(newKey.label)}`} size={220} />
             </div>
             <p className="text-xs text-gray-400 font-mono break-all">{newKey.secret}</p>
             <button

@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{256F4E96-6A7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{F965A1B1-D6BC-C014-30AA-28F00427002A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnanPasskeyApi", "web\api\OnanPasskeyApi.csproj", "{4635643D-7FA9-F326-7903-DABEE3AFDDBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopCarPasskeyApi", "web\api\CopCarPasskeyApi.csproj", "{4635643D-7FA9-F326-7903-DABEE3AFDDBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

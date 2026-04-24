@@ -177,7 +177,7 @@ async function showNewKeyModal(data) {
   const secret = document.getElementById("qr-secret");
   const inlineQr = document.getElementById("qr-inline");
 
-  const enrollUrl = `onanpasskey://enroll?secret=${encodeURIComponent(data.secret)}&label=${encodeURIComponent(data.label)}`;
+  const enrollUrl = `CopCarpasskey://enroll?secret=${encodeURIComponent(data.secret)}&label=${encodeURIComponent(data.label)}`;
   title.textContent = `Enroll: ${data.label}`;
   link.href = enrollUrl;
   link.textContent = enrollUrl;

@@ -23,7 +23,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <form onSubmit={submit} className="bg-white rounded-xl shadow p-8 w-full max-w-sm space-y-4">
-        <h1 className="text-xl font-bold text-gray-900">Onan Passkey</h1>
+        <h1 className="text-xl font-bold text-gray-900">CopCar Passkey</h1>
         {error && <p className="text-red-600 text-sm">{error}</p>}
         <input
           className="w-full border rounded px-3 py-2 text-sm"

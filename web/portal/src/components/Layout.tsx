@@ -19,7 +19,7 @@ export default function Layout() {
       <nav className="bg-gray-800">
         <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-14">
           <div className="flex items-center gap-4">
-            <span className="text-white font-semibold">Onan Passkey</span>
+            <span className="text-white font-semibold">CopCar Passkey</span>
             {navLink('/keys', 'Keys')}
             {navLink('/logs', 'Audit Log')}
           </div>

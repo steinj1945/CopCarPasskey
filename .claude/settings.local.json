@@ -4,7 +4,11 @@
       "Bash(git -C C:/Projects/iOS-Onan-Modbus rm .github/workflows/api.yml .github/workflows/firmware.yml .github/workflows/portal.yml)",
       "Bash(git -C C:/Projects/iOS-Onan-Modbus rm -r app/OnanPasskey/)",
       "Bash(git -C C:/Projects/iOS-Onan-Modbus commit -m ' *)",
-      "Bash(git -C C:/Projects/iOS-Onan-Modbus push)"
+      "Bash(git -C C:/Projects/iOS-Onan-Modbus push)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git *)"
     ]
   }
 }
