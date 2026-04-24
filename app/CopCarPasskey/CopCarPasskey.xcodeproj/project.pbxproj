@@ -24,6 +24,7 @@
 		2E33839380A5C51A42F09842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		326B33A7251F181F5C46552B /* SecretStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretStore.swift; sourceTree = "<group>"; };
 		447250360120E41B4B188C39 /* CopCarPasskey.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CopCarPasskey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5796019B2F9B0428001108DF /* Assets 2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 2.xcassets"; sourceTree = "<group>"; };
 		67E0425F5BFC54AB37D7B80A /* CopCarPasskeyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopCarPasskeyApp.swift; sourceTree = "<group>"; };
 		74E62C8E96E5B021E0C71485 /* WatchSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSyncManager.swift; sourceTree = "<group>"; };
 		8DFF2BE661EFA55C6A52F3C9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -70,6 +71,7 @@
 				2E33839380A5C51A42F09842 /* Info.plist */,
 				A414CA326D5F34F11652923B /* PasskeyPeripheral.swift */,
 				8DFF2BE661EFA55C6A52F3C9 /* SettingsView.swift */,
+				5796019B2F9B0428001108DF /* Assets 2.xcassets */,
 			);
 			path = CopCarPasskey;
 			sourceTree = "<group>";
@@ -102,8 +104,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = F3222BA2A3D0BD2AFDBEA648 /* Build configuration list for PBXProject "CopCarPasskey" */;
 			developmentRegion = en;
