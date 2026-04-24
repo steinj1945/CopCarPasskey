@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OnanPasskeyApi.Data;
+using CopCarPasseyApi.Data;
 
-namespace OnanPasskeyApi.Controllers;
+namespace CopCarPasseyApi.Controllers;
 
 [ApiController]
 [Route("api/logs")]

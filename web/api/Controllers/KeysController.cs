@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OnanPasskeyApi.Data;
-using OnanPasskeyApi.Services;
+using CopCarPasseyApi.Data;
+using CopCarPasseyApi.Services;
 
-namespace OnanPasskeyApi.Controllers;
+namespace CopCarPasseyApi.Controllers;
 
 [ApiController]
 [Route("api/keys")]

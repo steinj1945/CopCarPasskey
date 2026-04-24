@@ -1,4 +1,4 @@
-namespace OnanPasskeyApi.Models;
+namespace CopCarPasseyApi.Models;
 
 public class PassKey
 {

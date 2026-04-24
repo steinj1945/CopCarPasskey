@@ -1,8 +1,8 @@
 using System.Security.Cryptography;
-using OnanPasskeyApi.Data;
-using OnanPasskeyApi.Models;
+using CopCarPasseyApi.Data;
+using CopCarPasseyApi.Models;
 
-namespace OnanPasskeyApi.Services;
+namespace CopCarPasseyApi.Services;
 
 public class PassKeyService(AppDbContext db)
 {

@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY OnanPasskeyApi.csproj .
+COPY CopCarPasseyApi.csproj .
 RUN dotnet restore
 
 COPY . .
@@ -21,4 +21,4 @@ VOLUME ["/app/data"]
 ENV ConnectionStrings__Default="Data Source=/app/data/passkey.db"
 
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "OnanPasskeyApi.dll"]
+ENTRYPOINT ["dotnet", "CopCarPasseyApi.dll"]

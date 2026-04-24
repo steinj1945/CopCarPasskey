@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using OnanPasskeyApi.Data;
-using OnanPasskeyApi.Services;
+using CopCarPasseyApi.Data;
+using CopCarPasseyApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

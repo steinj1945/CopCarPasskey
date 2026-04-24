@@ -4,9 +4,9 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using OnanPasskeyApi.Data;
+using CopCarPasseyApi.Data;
 
-namespace OnanPasskeyApi.Controllers;
+namespace CopCarPasseyApi.Controllers;
 
 [ApiController]
 [Route("api/auth")]

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using OnanPasskeyApi.Models;
+using CopCarPasseyApi.Models;
 
-namespace OnanPasskeyApi.Data;
+namespace CopCarPasseyApi.Data;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
