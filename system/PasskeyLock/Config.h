@@ -25,10 +25,18 @@
 #define RSSI_THRESHOLD          -70
 
 // ── HMAC key (32 bytes, loaded from NVS at boot) ─────────────────
-// Written once by system/Provisioning/Provisioning.ino via Preferences.
+// Written by the iOS app via WiFi provisioning (hold button 5 s to activate).
 #define HMAC_KEY_LEN    32
 #define NVS_NAMESPACE   "passkey"
 #define NVS_KEY_SECRET  "secret"
+
+// ── WiFi SoftAP provisioning ──────────────────────────────────────
+// Hold PIN_BUTTON for PROV_BUTTON_HOLD_MS on boot to enter provisioning mode.
+// The ESP32 becomes an AP; the iOS app connects and POSTs the encrypted secret.
+#define PROV_SSID             "CopCar-Setup"
+#define PROV_PASS             "copcar1234"
+#define PROV_BUTTON_HOLD_MS   5000    // ms button must be held to trigger
+#define PROV_TIMEOUT_MS       300000  // AP shuts down after 5 min if unused
 
 // ── BLE session encryption packet size ───────────────────────────
 // CHALLENGE and RESPONSE characteristics carry encrypted payloads:

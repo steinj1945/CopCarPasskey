@@ -22,6 +22,8 @@
 	<array>
 		<string>bluetooth-peripheral</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location access is required to join the device setup Wi-Fi network.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 </dict>

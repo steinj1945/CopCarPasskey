@@ -17,3 +17,9 @@ enum DeepLink {
     static let scheme = "CopCarpasskey"
     static let enrollHost = "enroll"
 }
+
+enum ProvisioningConstants {
+    static let ssid     = "CopCar-Setup"
+    static let password = "copcar1234"
+    static let url      = "http://192.168.4.1/provision"
+}
