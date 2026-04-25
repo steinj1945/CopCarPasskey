@@ -3,7 +3,7 @@
 // ── Pin assignments (ESP32) ───────────────────────────────────────
 #define PIN_BUTTON      32  // GPIO32 — primary button (RTC-capable; wakes deep sleep)
 #define PIN_BUTTON_AUX  33  // GPIO33 — auxiliary button (wired, reserved for future use)
-#define PIN_RELAY        4  // GPIO4  — relay IN (HIGH = energised / open) ← verify your wiring
+#define PIN_RELAY       14  // GPIO14 — relay IN (HIGH = energised / open)
 #define PIN_LED_RED     25  // GPIO25 — red   LED
 #define PIN_LED_YELLOW  26  // GPIO26 — yellow LED
 #define PIN_LED_GREEN   27  // GPIO27 — green  LED
@@ -38,7 +38,7 @@
 #define PROV_SSID             "CopCar-Setup"
 #define PROV_PASS             "copcar1234"
 #define PROV_BUTTON_HOLD_MS   5000    // ms button must be held to trigger
-#define PROV_TIMEOUT_MS       300000  // AP shuts down after 5 min if unused
+#define PROV_TIMEOUT_MS       150000  // AP shuts down after 2.5 min if unused
 
 // ── BLE session encryption packet size ───────────────────────────
 // CHALLENGE and RESPONSE characteristics carry encrypted payloads:
