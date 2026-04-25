@@ -11,6 +11,9 @@
 		1360A2D08783792A9D84D9CA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF2BE661EFA55C6A52F3C9 /* SettingsView.swift */; };
 		33584822A9E88E87D022C54D /* SecretStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B33A7251F181F5C46552B /* SecretStore.swift */; };
 		38CDD4AFE7A582152087AD93 /* CopCarPasskeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E0425F5BFC54AB37D7B80A /* CopCarPasskeyApp.swift */; };
+		572616A02F9D01A8006D7256 /* ProvisioningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5726169F2F9D01A8006D7256 /* ProvisioningManager.swift */; };
+		572616A32F9D01E9006D7256 /* SessionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572616A22F9D01E9006D7256 /* SessionKeys.swift */; };
+		572616A42F9D01E9006D7256 /* SessionCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572616A12F9D01E9006D7256 /* SessionCrypto.swift */; };
 		5796019D2F9B90B3001108DF /* Assets 2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5796019B2F9B0428001108DF /* Assets 2.xcassets */; };
 		772E6D552B395E2F4EA80264 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A298979DC746A1EDF15D1D /* ContentView.swift */; };
 		7BFB8C94F598A0140FF6CBE7 /* EnrollmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7ED719BB7ACBEA636B1AEED /* EnrollmentManager.swift */; };
@@ -24,7 +27,10 @@
 		0825D40CB77D273018E8718C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2E33839380A5C51A42F09842 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		326B33A7251F181F5C46552B /* SecretStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretStore.swift; sourceTree = "<group>"; };
-		447250360120E41B4B188C39 /* CopCarPasskey.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CopCarPasskey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		447250360120E41B4B188C39 /* CopCarPasskey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopCarPasskey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5726169F2F9D01A8006D7256 /* ProvisioningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvisioningManager.swift; sourceTree = "<group>"; };
+		572616A12F9D01E9006D7256 /* SessionCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCrypto.swift; sourceTree = "<group>"; };
+		572616A22F9D01E9006D7256 /* SessionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionKeys.swift; sourceTree = "<group>"; };
 		5796019B2F9B0428001108DF /* Assets 2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 2.xcassets"; sourceTree = "<group>"; };
 		67E0425F5BFC54AB37D7B80A /* CopCarPasskeyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopCarPasskeyApp.swift; sourceTree = "<group>"; };
 		74E62C8E96E5B021E0C71485 /* WatchSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSyncManager.swift; sourceTree = "<group>"; };
@@ -55,6 +61,8 @@
 		8DA85D3DAFEA9410004F0E1C /* CopCarPasskeyShared */ = {
 			isa = PBXGroup;
 			children = (
+				572616A12F9D01E9006D7256 /* SessionCrypto.swift */,
+				572616A22F9D01E9006D7256 /* SessionKeys.swift */,
 				0825D40CB77D273018E8718C /* Constants.swift */,
 				040C521D5B09690F70C3FE8C /* HMACAuth.swift */,
 				326B33A7251F181F5C46552B /* SecretStore.swift */,
@@ -66,6 +74,7 @@
 		9A8E73C8A77DA116B1753D76 /* CopCarPasskey */ = {
 			isa = PBXGroup;
 			children = (
+				5726169F2F9D01A8006D7256 /* ProvisioningManager.swift */,
 				92A298979DC746A1EDF15D1D /* ContentView.swift */,
 				67E0425F5BFC54AB37D7B80A /* CopCarPasskeyApp.swift */,
 				D7ED719BB7ACBEA636B1AEED /* EnrollmentManager.swift */,
@@ -105,7 +114,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 2640;
 			};
 			buildConfigurationList = F3222BA2A3D0BD2AFDBEA648 /* Build configuration list for PBXProject "CopCarPasskey" */;
 			developmentRegion = en;
@@ -142,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				572616A02F9D01A8006D7256 /* ProvisioningManager.swift in Sources */,
 				01962255BCCE86E9F79EF52C /* Constants.swift in Sources */,
 				772E6D552B395E2F4EA80264 /* ContentView.swift in Sources */,
 				38CDD4AFE7A582152087AD93 /* CopCarPasskeyApp.swift in Sources */,
@@ -149,6 +159,8 @@
 				8A666C858598E1BE5540F04B /* HMACAuth.swift in Sources */,
 				F7A63B61059369021E902A89 /* PasskeyPeripheral.swift in Sources */,
 				33584822A9E88E87D022C54D /* SecretStore.swift in Sources */,
+				572616A32F9D01E9006D7256 /* SessionKeys.swift in Sources */,
+				572616A42F9D01E9006D7256 /* SessionCrypto.swift in Sources */,
 				1360A2D08783792A9D84D9CA /* SettingsView.swift in Sources */,
 				AB0C7157C662072236F5FFC9 /* WatchSyncManager.swift in Sources */,
 			);
@@ -194,6 +206,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -205,8 +218,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -251,6 +266,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -271,6 +287,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -284,14 +301,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CopCarPasskey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.copcar.passkey;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.9;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -301,14 +323,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CopCarPasskey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.copcar.passkey;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.9;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
