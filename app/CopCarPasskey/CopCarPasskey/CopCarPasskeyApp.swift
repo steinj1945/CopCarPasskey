@@ -16,9 +16,12 @@ struct CopCarPasskeyApp: App {
                 .environmentObject(provisioning)
                 .onOpenURL { url in
                     guard url.scheme == DeepLink.scheme else { return }
-                    try? enrollment.enroll(from: url)
-                    // Auto-push to Watch after successful enrollment
-                    watchSync.pushSecretToWatch()
+                    do {
+                        try enrollment.enroll(from: url)
+                        watchSync.pushSecretToWatch()
+                    } catch {
+                        enrollment.enrollmentError = error.localizedDescription
+                    }
                 }
         }
     }

@@ -22,9 +22,20 @@
 	<array>
 		<string>bluetooth-peripheral</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is required to scan the enrollment QR code.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location access is required to join the device setup Wi-Fi network.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>copcarpasskey</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -1,14 +1,45 @@
 import SwiftUI
+import VisionKit
 
 struct ContentView: View {
     @EnvironmentObject var peripheral: PasskeyPeripheral
     @EnvironmentObject var enrollment: EnrollmentManager
+    @State private var showScanner = false
 
     var body: some View {
         NavigationStack {
             ZStack {
                 background
                 content
+            }
+            .sheet(isPresented: $showScanner) {
+                if DataScannerViewController.isAvailable {
+                    QRScannerView { payload in
+                        showScanner = false
+                        guard let url = URL(string: payload) else {
+                            enrollment.enrollmentError = "QR code did not contain a valid URL"
+                            return
+                        }
+                        do {
+                            try enrollment.enroll(from: url)
+                            WatchSyncManager.shared.pushSecretToWatch()
+                        } catch {
+                            enrollment.enrollmentError = error.localizedDescription
+                        }
+                    }
+                } else {
+                    ContentUnavailableView("Scanner Unavailable",
+                        systemImage: "qrcode.viewfinder",
+                        description: Text("This device does not support the QR scanner."))
+                }
+            }
+            .alert("Enrollment Failed", isPresented: Binding(
+                get: { enrollment.enrollmentError != nil },
+                set: { if !$0 { enrollment.enrollmentError = nil } }
+            )) {
+                Button("OK", role: .cancel) { enrollment.enrollmentError = nil }
+            } message: {
+                Text(enrollment.enrollmentError ?? "")
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -71,14 +102,28 @@ struct ContentView: View {
             }
 
             if !enrollment.isEnrolled {
-                VStack(spacing: 8) {
-                    Text("No key enrolled")
-                        .font(.headline)
-                        .foregroundStyle(.white)
-                    Text("Scan the QR code from the admin portal to enroll your device.")
-                        .font(.callout)
-                        .foregroundStyle(.white.opacity(0.75))
-                        .multilineTextAlignment(.center)
+                VStack(spacing: 16) {
+                    VStack(spacing: 8) {
+                        Text("No key enrolled")
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                        Text("Scan the QR code from the admin portal to enroll your device.")
+                            .font(.callout)
+                            .foregroundStyle(.white.opacity(0.75))
+                            .multilineTextAlignment(.center)
+                    }
+
+                    Button {
+                        showScanner = true
+                    } label: {
+                        Label("Scan QR Code", systemImage: "qrcode.viewfinder")
+                            .font(.headline)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 12)
+                            .background(.white.opacity(0.15))
+                            .foregroundStyle(.white)
+                            .clipShape(Capsule())
+                    }
                 }
                 .padding(.horizontal, 32)
             }
