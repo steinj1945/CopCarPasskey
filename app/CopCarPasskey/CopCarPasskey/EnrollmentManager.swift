@@ -11,8 +11,9 @@ final class EnrollmentManager: ObservableObject {
     }
 
     func refresh() {
-        isEnrolled   = SecretStore.load() != nil
-        enrolledLabel = UserDefaults.standard.string(forKey: "enrolledLabel") ?? ""
+        let entry = SecretStore.loadEntry()
+        isEnrolled    = entry != nil
+        enrolledLabel = entry?.label ?? ""
     }
 
     /// Called when the user scans the QR code deep-link.
@@ -38,17 +39,15 @@ final class EnrollmentManager: ObservableObject {
         }
 
         do {
-            try SecretStore.save(secretData)
+            try SecretStore.save(secretData, label: label)
         } catch {
             throw EnrollmentError.keychainFailed(error)
         }
-        UserDefaults.standard.set(label, forKey: "enrolledLabel")
         refresh()
     }
 
     func removeKey() {
         SecretStore.delete()
-        UserDefaults.standard.removeObject(forKey: "enrolledLabel")
         refresh()
     }
 

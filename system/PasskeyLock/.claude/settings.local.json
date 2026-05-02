@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(cmd.exe /c \"where arduino-cli 2>nul & where arduino-cli.exe 2>nul\")",
-      "Bash(cmd.exe /c \"dir \"\"C:\\\\Users\\\\stein\\\\AppData\\\\Local\\\\Arduino15\"\" /b\")"
+      "Bash(cmd.exe /c \"dir \"\"C:\\\\Users\\\\stein\\\\AppData\\\\Local\\\\Arduino15\"\" /b\")",
+      "Bash(chmod +x *)",
+      "Bash(~/.platformio/penv/bin/pio platform *)",
+      "Read(//Users/jonathan/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/**)",
+      "Bash(~/.platformio/penv/bin/pio run *)"
     ]
   }
 }

@@ -69,7 +69,7 @@ enum SessionKeys {{
 script_dir = os.path.dirname(os.path.abspath(__file__))
 repo_root  = os.path.dirname(script_dir)
 
-h_path     = os.path.join(repo_root, "system", "PasskeyLock", "SessionKeys.h")
+h_path     = os.path.join(repo_root, "system", "PasskeyLock", "src", "SessionKeys.h")
 swift_path = os.path.join(repo_root, "app", "CopCarPasskey",
                           "CopCarPasskeyShared", "SessionKeys.swift")
 
