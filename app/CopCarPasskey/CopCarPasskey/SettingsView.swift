@@ -37,7 +37,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Device Setup")
                 } footer: {
-                    Text("Hold the ESP32 button for 5 seconds until it blinks rapidly, then tap Provision.")
+                    Text("Hold the ESP32 button for 5 seconds until it blinks rapidly, then tap Provision New Device.")
                         .font(.caption)
                 }
             }
@@ -59,9 +59,47 @@ struct SettingsView: View {
     @ViewBuilder
     private var provisionButton: some View {
         switch provisioning.state {
+        case .idle:
+            Button {
+                provisioning.beginProvisioning()
+            } label: {
+                Label("Provision New Device", systemImage: "wifi.router")
+            }
+
+        case .waitingForWifi:
+            VStack(alignment: .leading, spacing: 10) {
+                Label("Connect to the device Wi-Fi", systemImage: "wifi")
+                    .font(.headline)
+                Text("1. Open **Settings → Wi-Fi** on this phone.\n2. Join **\(ProvisioningConstants.ssid)** (password: \(ProvisioningConstants.password)).\n3. Return here and tap Send Key.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                HStack(spacing: 12) {
+                    Button("Send Key") {
+                        guard let secret = SecretStore.load() else { return }
+                        Task { await provisioning.sendKey(secret: secret) }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    Button("Cancel", role: .cancel) { provisioning.reset() }
+                }
+                .padding(.top, 4)
+            }
+            .padding(.vertical, 4)
+
+        case .sending:
+            Label("Sending key…", systemImage: "arrow.up.circle")
+                .foregroundStyle(.secondary)
+
         case .success:
-            Label("Provisioned successfully", systemImage: "checkmark.circle.fill")
-                .foregroundStyle(.green)
+            VStack(alignment: .leading, spacing: 6) {
+                Label("Provisioned successfully", systemImage: "checkmark.circle.fill")
+                    .foregroundStyle(.green)
+                Text("You can now reconnect to your normal Wi-Fi network.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Button("Done") { provisioning.reset() }
+                    .font(.caption)
+            }
+
         case .failed(let msg):
             VStack(alignment: .leading, spacing: 4) {
                 Label("Provisioning failed", systemImage: "xmark.circle.fill")
@@ -71,19 +109,6 @@ struct SettingsView: View {
                     .foregroundStyle(.secondary)
                 Button("Try Again") { provisioning.reset() }
                     .font(.caption)
-            }
-        case .connectingToAP:
-            Label("Connecting to device…", systemImage: "wifi")
-                .foregroundStyle(.secondary)
-        case .sending:
-            Label("Sending key…", systemImage: "arrow.up.circle")
-                .foregroundStyle(.secondary)
-        case .idle:
-            Button {
-                guard let secret = SecretStore.load() else { return }
-                Task { await provisioning.provision(secret: secret) }
-            } label: {
-                Label("Provision New Device", systemImage: "wifi.router")
             }
         }
     }

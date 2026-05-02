@@ -28,6 +28,17 @@
 	<string>Camera access is required to scan the enrollment QR code.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location access is required to join the device setup Wi-Fi network.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>192.168.4.1</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>CFBundleURLTypes</key>
