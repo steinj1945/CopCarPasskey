@@ -9,12 +9,12 @@ enum BLEConstants {
 }
 
 enum KeychainKeys {
-    static let sharedSecret = "com.CopCar.passkey.shared-secret"
+    static let sharedSecret = "com.copcar.passkey.shared-secret"
 }
 
 enum DeepLink {
-    // CopCarpasskey://enroll?secret=<hex>&label=<name>
-    static let scheme = "CopCarpasskey"
+    // copcarpasskey://enroll?secret=<hex>&label=<name>
+    static let scheme = "copcarpasskey"
     static let enrollHost = "enroll"
 }
 

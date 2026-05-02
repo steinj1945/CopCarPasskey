@@ -1,5 +1,6 @@
 #include "ProvisioningMode.h"
 #include "SessionCrypto.h"
+#include "LedController.h"
 #include "Config.h"
 #include <WiFi.h>
 #include <WebServer.h>
@@ -8,7 +9,8 @@
 #include <Arduino.h>
 
 void provisioning_run() {
-    digitalWrite(PIN_STATUS_LED, HIGH);
+    led_set(LED_AP_MODE);
+    led_update();
     Serial.println("Provisioning mode: starting WiFi AP");
 
     WiFi.softAP(PROV_SSID, PROV_PASS);
@@ -26,19 +28,30 @@ void provisioning_run() {
             return;
         }
 
+        Serial.printf("[Prov] POST /provision: body len=%d\n", body.length());
+        Serial.printf("[Prov] body (base64): %s\n", body.c_str());
+
         // Base64-decode → 60-byte encrypted packet
         uint8_t enc[SESSION_PACKET_LEN];
         size_t  olen = 0;
         int r = mbedtls_base64_decode(enc, sizeof(enc), &olen,
                     (const uint8_t*)body.c_str(), body.length());
+        Serial.printf("[Prov] base64 decode: r=%d olen=%u (expected %d)\n",
+                      r, (unsigned)olen, SESSION_PACKET_LEN);
         if (r != 0 || olen != SESSION_PACKET_LEN) {
+            Serial.printf("[Prov] bad payload — sending 400\n");
             server.send(400, "text/plain", "bad payload");
             return;
         }
 
+        Serial.print("[Prov] decoded packet (hex): ");
+        for (size_t i = 0; i < olen; i++) Serial.printf("%02x", enc[i]);
+        Serial.println();
+
         // Decrypt → 32-byte HMAC secret
         uint8_t secret[32];
         if (!session_decrypt(enc, secret)) {
+            Serial.println("[Prov] decryption failed — sending 403");
             server.send(403, "text/plain", "decryption failed");
             return;
         }
@@ -64,7 +77,7 @@ void provisioning_run() {
     uint32_t start = millis();
     while (!done && (millis() - start < PROV_TIMEOUT_MS)) {
         server.handleClient();
-        digitalWrite(PIN_STATUS_LED, (millis() / 500) % 2);  // 500 ms blink
+        led_update();
     }
 
     server.stop();
@@ -75,6 +88,5 @@ void provisioning_run() {
         ESP.restart();
     } else {
         Serial.println("Provisioning timed out. Continuing normal boot.");
-        digitalWrite(PIN_STATUS_LED, LOW);
     }
 }

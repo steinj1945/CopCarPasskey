@@ -22,9 +22,33 @@
 	<array>
 		<string>bluetooth-peripheral</string>
 	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Bluetooth is required to communicate with the CopCar lock.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is required to scan the enrollment QR code.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location access is required to join the device setup Wi-Fi network.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>192.168.4.1</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>copcarpasskey</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

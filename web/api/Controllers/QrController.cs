@@ -16,7 +16,7 @@ public class QrController : ControllerBase
             return BadRequest(new { error = "Text is required" });
 
         using var generator = new QRCodeGenerator();
-        using var data = generator.CreateQrCode(request.Text, QRCodeGenerator.ECCLevel.Q);
+        using var data = generator.CreateQrCode(request.Text, QRCodeGenerator.ECCLevel.Default);
         var svg = new SvgQRCode(data).GetGraphic(8);
 
         return Content(svg, "image/svg+xml");

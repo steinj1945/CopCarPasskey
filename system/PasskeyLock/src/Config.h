@@ -1,17 +1,20 @@
 #pragma once
+#include <stdint.h>
 
 // ── Pin assignments (ESP32) ───────────────────────────────────────
-// Adjust to match your specific board layout.
-#define PIN_BUTTON      0   // GPIO0 — boot button, or any RTC-capable GPIO
-#define PIN_RELAY       26  // GPIO26 — relay IN (HIGH = energised / open)
-#define PIN_STATUS_LED  2   // GPIO2  — built-in LED on most ESP32 dev boards
+#define PIN_BUTTON      32  // GPIO32 — primary button (RTC-capable; wakes deep sleep)
+#define PIN_BUTTON_AUX  33  // GPIO33 — auxiliary button (wired, reserved for future use)
+#define PIN_RELAY       14  // GPIO14 — relay IN (HIGH = energised / open)
+#define PIN_LED_RED     25  // GPIO25 — red   LED
+#define PIN_LED_YELLOW  26  // GPIO26 — yellow LED
+#define PIN_LED_GREEN   27  // GPIO27 — green  LED
 
 // ── BLE service / characteristic UUIDs ──────────────────────────
 // Must match the iOS/Watch app exactly.
-#define UUID_SERVICE    "A1B2C3D4-E5F6-7890-ABCD-EF1234567890"
-#define UUID_CHALLENGE  "A1B2C3D4-E5F6-7890-ABCD-EF1234567891"
-#define UUID_RESPONSE   "A1B2C3D4-E5F6-7890-ABCD-EF1234567892"
-#define UUID_STATUS     "A1B2C3D4-E5F6-7890-ABCD-EF1234567893"
+#define UUID_SERVICE    "6CEC9D24-598B-40CF-AA8F-A2BE12A626A6"
+#define UUID_CHALLENGE  "FE879FA1-26CE-4CEB-AC6A-0FAE75D25E03"
+#define UUID_RESPONSE   "8EDE1ACC-39C6-4600-A06D-2D431C78ECB9"
+#define UUID_STATUS     "84962402-30AF-4AD3-A1AB-55696CFE1AB4"
 
 // ── Timing (ms) ──────────────────────────────────────────────────
 #define SCAN_TIMEOUT_MS         15000   // Give up scanning after 15 s
@@ -36,7 +39,7 @@
 #define PROV_SSID             "CopCar-Setup"
 #define PROV_PASS             "copcar1234"
 #define PROV_BUTTON_HOLD_MS   5000    // ms button must be held to trigger
-#define PROV_TIMEOUT_MS       300000  // AP shuts down after 5 min if unused
+#define PROV_TIMEOUT_MS       150000  // AP shuts down after 2.5 min if unused
 
 // ── BLE session encryption packet size ───────────────────────────
 // CHALLENGE and RESPONSE characteristics carry encrypted payloads:

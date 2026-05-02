@@ -20,13 +20,12 @@ final class WatchSyncManager: NSObject, ObservableObject {
     func pushSecretToWatch() {
         guard WCSession.default.isPaired,
               WCSession.default.isWatchAppInstalled,
-              let secret = SecretStore.load(),
-              let label  = UserDefaults.standard.string(forKey: "enrolledLabel")
+              let entry = SecretStore.loadEntry()
         else { return }
 
         let payload: [String: Any] = [
-            "secret": secret.base64EncodedString(),
-            "label":  label
+            "secret": entry.secret.base64EncodedString(),
+            "label":  entry.label
         ]
         WCSession.default.transferUserInfo(payload)
         syncStatus = "Synced to Watch"
@@ -44,8 +43,7 @@ extension WatchSyncManager: WCSessionDelegate {
         else { return }
 
         Task { @MainActor in
-            try? SecretStore.save(secret)
-            UserDefaults.standard.set(label, forKey: "enrolledLabel")
+            try? SecretStore.save(secret, label: label)
             syncStatus = "Key received from iPhone"
         }
     }

@@ -30,6 +30,8 @@ system/**/*.hex
 system/**/*.elf
 system/**/*.map
 
+system/PasskeyLock/build/
+
 # Secrets — never commit real keys
 web/api/appsettings.Production.json
 
